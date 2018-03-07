@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:28:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/07 16:20:38 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/03/07 17:01:28 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,57 @@ char	*get_type(mode_t mode)
 	return ("");
 }
 
+char	*get_perms(mode_t mode)
+{
+	char *str;
+
+	str = malloc(sizeof(char) * 10);
+	str[9] = '\0';
+	if ((mode & S_IRUSR) == S_IRUSR)
+		str[0] = 'r';
+	else
+		str[0] = '-';
+	if ((mode & S_IWUSR) == S_IWUSR)
+		str[1] = 'w';
+	else
+		str[1] = '-';
+	if ((mode & S_IXUSR) == S_IXUSR)
+		str[2] = 'x';
+	else
+		str[2] = '-';
+	if ((mode & S_IRGRP) == S_IRGRP)
+		str[3] = 'r';
+	else
+		str[3] = '-';
+	if ((mode & S_IWGRP) == S_IWGRP)
+		str[4] = 'w';
+	else
+		str[4] = '-';
+	if ((mode & S_IXGRP) == S_IXGRP)
+		str[5] = 'x';
+	else
+		str[5] = '-';
+	if ((mode & S_IROTH) == S_IROTH)
+		str[6] = 'r';
+	else
+		str[6] = '-';
+	if ((mode & S_IWOTH) == S_IWOTH)
+		str[7] = 'w';
+	else
+		str[7] = '-';
+	if ((mode & S_IXOTH) == S_IXOTH)
+		str[8] = 'x';
+	else	
+		str[8] = '-';
+	return (str);
+	}
+
 void	more_info(struct dirent *file)
 {
 	struct stat 	*info;
 	struct passwd 	*yo;
 	struct group	*poto;
+	char			*bin;
 
 	yo = NULL;
 	poto = NULL;
@@ -51,10 +97,12 @@ void	more_info(struct dirent *file)
 	if ((stat(file->d_name, info)) == 0)
 	{
 		ft_printf("Type : %s\n", get_type(info->st_mode));
+		ft_printf("Perms : %s\n", (bin = get_perms(info->st_mode)));
 		yo = getpwuid(info->st_uid);
 		ft_printf("User : %s\n", yo->pw_name);
 		poto = getgrgid(info->st_gid);
 		ft_printf("Group : %s\n", poto->gr_name);
+		ft_strdel(&bin);
 	} else
 		perror(strerror(errno));
 }
