@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/08 04:13:47 by apruvost          #+#    #+#              #
-#    Updated: 2018/03/07 14:35:54 by apruvost         ###   ########.fr        #
+#    Updated: 2018/03/22 08:06:32 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,16 @@ NAME = ft_ls
 
 CFLAGS = -Wall -Wextra -Werror
 
-SRCS = ft_ls.c
+SRCS =	main.c \
+		ft_ls.c \
+		ft_readrep.c \
+		ft_getinfo.c \
+		ft_fillst.c \
+		ft_lstswitch.c \
+		ft_getopt.c \
+		ft_display.c \
+		ft_dellst.c \
+		ft_exit.c
 
 OBJS = $(SRCS:.c=.o)
 
