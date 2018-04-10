@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:09:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 10:44:10 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/07 01:24:20 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static void		ft_sortt(t_file *start_file, t_file *curr_file, t_arg arg,
 {
 	if (arg.arg_r_ == FALSE && arg.arg_t_ == TRUE)
 	{
-		if (curr_file->stats->st_mtimespec.tv_sec >
-			curr_file->next->stats->st_mtimespec.tv_sec)
+		if (curr_file->stats->st_mtime >
+			curr_file->next->stats->st_mtime)
 		{
 			ft_lstswitch(start_file, curr_file, curr_file->next);
 			*ismod += 1;
@@ -26,8 +26,8 @@ static void		ft_sortt(t_file *start_file, t_file *curr_file, t_arg arg,
 	}
 	else if (arg.arg_r_ == TRUE && arg.arg_t_ == TRUE)
 	{
-		if (curr_file->stats->st_mtimespec.tv_sec <
-			curr_file->next->stats->st_mtimespec.tv_sec)
+		if (curr_file->stats->st_mtime <
+			curr_file->next->stats->st_mtime)
 		{
 			ft_lstswitch(start_file, curr_file, curr_file->next);
 			*ismod += 1;
@@ -72,9 +72,9 @@ t_file		*ft_sortlst(t_file *start_file, t_arg arg)
 			ismod = 0;
 			while (curr_file->next != NULL)
 			{
-				ft_sort(start_file, curr_file, arg,
-					&ismod);
-				curr_file = curr_file->next;
+				ft_sort(start_file, curr_file, arg, &ismod);
+				if (curr_file->next != NULL)
+					curr_file = curr_file->next;
 			}
 		}
 	}
@@ -83,7 +83,6 @@ t_file		*ft_sortlst(t_file *start_file, t_arg arg)
 
 t_file		*ft_addfile(t_file *start_file, t_file *curr_file)
 {
-	ft_printf("adding file to list\n");
 	curr_file->next = start_file;
 	return (curr_file);
 }
@@ -92,8 +91,7 @@ t_file		*ft_newfile(char *nname, char *reppath)
 {
 	t_file	*file;
 
-	ft_printf("Creating new file\n");
-	if ((file = (t_file *)malloc(sizeof(file))) == NULL)
+	if ((file = (t_file *)malloc(sizeof(t_file))) == NULL)
 		return (NULL);
 	if ((file->name = ft_strdup(nname)) == NULL)
 		return (NULL);
@@ -104,6 +102,5 @@ t_file		*ft_newfile(char *nname, char *reppath)
 	if ((file->lfstats = (struct stat *)malloc(sizeof(struct stat))) == NULL)
 		return (NULL);
 	file->next = NULL;
-	ft_printf("New file created\n");
 	return (file);
 }

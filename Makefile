@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/08 04:13:47 by apruvost          #+#    #+#              #
-#    Updated: 2018/03/22 08:06:32 by apruvost         ###   ########.fr        #
+#    Updated: 2018/04/05 08:39:17 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ OBJS = $(SRCS:.c=.o)
 LIB_PATH = libft
 LIB_LINK = -L $(LIB_PATH) -lft
 
-INC_DIR = ft_ls.h
-INCS = -I ./$(INC_DIR) -I $(INC_DIR)
+INC_DIR = .
+INCS = -I ./
 
 CC = gcc
 

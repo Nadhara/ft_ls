@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 09:41:40 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/05 08:32:12 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ static void		ft_noarg(t_arg *arg)
 int				main(int argc, char **argv)
 {
 	t_arg		arg;
-	int			i;
 	t_file		*curr_file;
 
-	i = 0;
 	if (argc == 1)
 		ft_noarg(&arg);
 	else

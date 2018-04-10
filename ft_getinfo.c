@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:30:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 10:43:19 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/07 01:25:48 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,9 @@ void			ft_getinfo(t_file *file)
 {
 	if ((lstat(file->path, file->stats)) == 0)
 	{
-		ft_printf("Getting infos\n");
 		file->type = ft_gettype(file->stats->st_mode);
 		file->perms = ft_getperms(file->stats->st_mode);
-		file->mtime = ctime(&(file->stats->st_mtimespec.tv_sec));
+		file->mtime = ctime(&(file->stats->st_mtime));
 		file->nuser = getpwuid(file->stats->st_uid);
 		file->ngroup = getgrgid(file->stats->st_gid);
 		if (file->type == 'l')
@@ -99,5 +98,4 @@ void			ft_getinfo(t_file *file)
 	}
 	else
 		perror(strerror(errno));
-	ft_printf("Infos get\n");
 }

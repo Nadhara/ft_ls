@@ -6,13 +6,13 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 14:42:32 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/07 13:41:12 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/05 08:48:42 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void static		ft_arg(char *str, va_list ap)
+static void		ft_arg(char *str, va_list ap)
 {
 	if (str[0] == 's')
 		ft_putstr((const char*)va_arg(ap, char*));
