@@ -6,80 +6,11 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:09:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/07 01:24:20 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:42:25 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-static void		ft_sortt(t_file *start_file, t_file *curr_file, t_arg arg,
-						int *ismod)
-{
-	if (arg.arg_r_ == FALSE && arg.arg_t_ == TRUE)
-	{
-		if (curr_file->stats->st_mtime >
-			curr_file->next->stats->st_mtime)
-		{
-			ft_lstswitch(start_file, curr_file, curr_file->next);
-			*ismod += 1;
-		}
-	}
-	else if (arg.arg_r_ == TRUE && arg.arg_t_ == TRUE)
-	{
-		if (curr_file->stats->st_mtime <
-			curr_file->next->stats->st_mtime)
-		{
-			ft_lstswitch(start_file, curr_file, curr_file->next);
-			*ismod += 1;
-		}
-	}
-}
-
-static void		ft_sort(t_file *start_file, t_file *curr_file, t_arg arg,
-						int *ismod)
-{
-	if (arg.arg_r_ == FALSE && arg.arg_t_ == FALSE)
-	{
-		if (ft_strcmp(curr_file->name, curr_file->next->name) < 0)
-		{
-			ft_lstswitch(start_file, curr_file, curr_file->next);
-			*ismod += 1;
-		}
-	}
-	else if (arg.arg_r_ == TRUE && arg.arg_t_ == FALSE)
-	{
-		if (ft_strcmp(curr_file->name, curr_file->next->name) > 0)
-		{
-			ft_lstswitch(start_file, curr_file, curr_file->next);
-			*ismod += 1;
-		}
-	}
-	else
-		ft_sortt(start_file, curr_file, arg, ismod);
-}
-
-t_file		*ft_sortlst(t_file *start_file, t_arg arg)
-{
-	int		ismod;
-	t_file	*curr_file;
-
-	ismod = 1;
-	if (start_file != NULL)
-	{
-		while (ismod != 0)
-		{
-			curr_file = start_file;
-			ismod = 0;
-			while (curr_file->next != NULL)
-			{
-				ft_sort(start_file, curr_file, arg, &ismod);
-				if (curr_file->next != NULL)
-					curr_file = curr_file->next;
-			}
-		}
-	}
-	return (start_file);
-}
 
 t_file		*ft_addfile(t_file *start_file, t_file *curr_file)
 {

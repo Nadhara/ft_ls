@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/05 08:32:12 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:50:02 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void		ft_getargs(int argc, char **argv, t_arg *arg)
 			isarg = FALSE;
 	}
 	arg->nb_file = argc - i;
+	arg->d_showed = 0;
 	arg->args = NULL;
 	ft_getfargs(argc, argv, arg, i);
 	arg->args = ft_sortlst(arg->args, *arg);
@@ -69,6 +70,7 @@ static void		ft_noarg(t_arg *arg)
 	arg->arg_t_ = FALSE;
 	arg->nb_file = FALSE;
 	arg->args = NULL;
+	arg->d_showed = 0;
 }
 
 int				main(int argc, char **argv)
@@ -81,14 +83,15 @@ int				main(int argc, char **argv)
 	else
 		ft_getargs(argc, argv, &arg);
 	if (arg.nb_file == 0)
-		ft_ls(ft_strdup("./"), arg, 0);
+		ft_ls(ft_strdup("./"), &arg, 0);
 	else
 	{
 		curr_file = arg.args;
 		while (curr_file != NULL)
 		{
-			if (curr_file->type == 'd')
-				ft_ls(curr_file->path, arg, ((arg.nb_file > 1) ? TRUE : FALSE));
+			if (curr_file->type == 'd' && curr_file->isdata != 0)
+				ft_ls(curr_file->path, &arg,
+							((arg.nb_file > 1) ? TRUE : FALSE));
 			curr_file = curr_file->next;
 		} 
 	}

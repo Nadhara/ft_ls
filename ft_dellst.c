@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 07:47:08 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 08:18:51 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:48:20 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static void		ft_dellone(t_file **file)
 {
 	ft_strdel(&(*file)->name);
 	ft_strdel(&(*file)->path);
-	ft_strdel(&(*file)->perms);
+	if ((*file)->isdata != 0)
+		ft_strdel(&(*file)->perms);
+	if ((*file)->isdata != 0 || (*file)->isdata != 3)
+		ft_strdel(&(*file)->mtime);
 	ft_memdel((void **)&(*file)->stats);
 	ft_memdel((void **)&(*file)->lfstats);
 	ft_memdel((void **)file);

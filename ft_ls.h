@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 11:32:08 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/04/11 15:21:20 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct		s_file
 	struct passwd 	*nuser;
 	struct group	*ngroup;
 
+	int				isdata;
 	struct s_file	*next;
 }					t_file;
 
@@ -60,11 +61,12 @@ typedef struct		s_arg
 	int				arg_r_;
 	int				arg_t_;
 	int				nb_file;
+	int				d_showed;
 	t_file			*args;
 }					t_arg;
 
 void				ft_getopt(char *str, t_arg *arg);
-void				ft_ls(char *path, t_arg arg, int shwpth);
+void				ft_ls(char *path, t_arg *arg, int shwpth);
 
 void				ft_showfiles(t_arg *arg);
 void				ft_display(t_default rep, t_file *start_file, t_arg arg);
@@ -75,7 +77,7 @@ void				ft_getinfo(t_file *curr_file);
 t_file				*ft_newfile(char *nname, char *reppath);
 t_file				*ft_addfile(t_file *start_file, t_file *curr_file);
 t_file				*ft_sortlst(t_file *start_file, t_arg arg);
-void				ft_lstswitch(t_file *start_file, t_file *curr_file,
+t_file				*ft_lstswitch(t_file *start_file, t_file *curr_file,
 								t_file *next_file);
 void				ft_dellst(t_file **start_file);
 
