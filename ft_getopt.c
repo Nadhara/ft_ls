@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 02:57:26 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 08:21:23 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:56:37 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void		ft_getopt(char *str, t_arg *arg)
 	{
 		if ((ft_isarg(str[i], arg, i)) == 0)
 		{
-			ft_exit(1);
+			ft_exit(1, str);
 			return ;
 		}
 		i++;

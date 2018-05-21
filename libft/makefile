@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 02:24:37 by apruvost          #+#    #+#              #
-#    Updated: 2018/03/07 13:33:25 by apruvost         ###   ########.fr        #
+#    Updated: 2018/05/21 16:27:06 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,9 @@ SRC = ft_memset.c \
 	  ft_isupper.c \
 	  get_next_line.c \
 	  ft_abs.c \
-	  ft_printf.c
+	  ft_printf.c \
+	  ft_dprintf.c \
+	  ft_getintlen.c
 
 HEADER = ./
 
@@ -150,7 +152,9 @@ OBJECTS = ft_memset.o \
 		  ft_isupper.o \
 		  get_next_line.o \
 		  ft_abs.o \
-		  ft_printf.o
+		  ft_printf.o \
+		  ft_dprintf.o \
+		  ft_getintlen.o
 
 all: $(NAME)
 

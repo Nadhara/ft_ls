@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:30:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/11 16:47:48 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 19:28:26 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ static char		*ft_getperms(mode_t mode)
 {
 	char *str;
 
-	str = malloc(sizeof(char) * 10);
-	str[9] = '\0';
+	str = malloc(sizeof(char) * 11);
+	str[10] = '\0';
+	str[9] = ' ';
 	if ((mode & S_IRUSR) == S_IRUSR)
 		str[0] = 'r';
 	else
@@ -89,21 +90,18 @@ void			ft_getinfo(t_file *file)
 		file->type = ft_gettype(file->stats->st_mode);
 		file->perms = ft_getperms(file->stats->st_mode);
 		if ((file->mtime = ft_strdup(ctime(&(file->stats->st_mtime)))) == NULL)
-			file->isdata = 3;
-		file->nuser = getpwuid(file->stats->st_uid);
-		file->ngroup = getgrgid(file->stats->st_gid);
-		if (file->type == 'l')
 		{
-			if ((stat(file->path, file->lfstats)) != 0)
-			{
-				file->isdata = 2;
-				perror(strerror(errno));
-			}
+			ft_exit(0, "");
+			file->isdata = 3;
 		}
+		if ((file->nuser = getpwuid(file->stats->st_uid)) == NULL)
+			ft_exit(2, file->name);
+		if ((file->ngroup = getgrgid(file->stats->st_gid)) == NULL)
+			ft_exit(2, file->name);
 	}
 	else
 	{
 		file->isdata = 0;
-		perror(strerror(errno));
+		ft_exit(2, file->name);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:59:11 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/11 16:37:51 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:03:57 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ static void		ft_readdir(t_file *file, t_arg *arg)
 			{
 				if (ft_strcmp(file->name, ".") != 0 &&
 					ft_strcmp(file->name, "..") != 0)
-					ft_ls(file->path, arg, TRUE);
+					ft_ls(file->path, arg, TRUE, file->name);
 			}
 			else if (file->name[0] != '.')
-				ft_ls(file->path, arg, TRUE);
+				ft_ls(file->path, arg, TRUE, file->name);
 		}
 		file = file->next;
 	}
 }
 
-void			ft_ls(char *path, t_arg *arg, int shwpth)
+void			ft_ls(char *path, t_arg *arg, int shwpth, char *name)
 {
 	t_default	rep;
 	t_file		*file;
@@ -43,18 +43,18 @@ void			ft_ls(char *path, t_arg *arg, int shwpth)
 	if ((repo = opendir(path)) == NULL)
 	{
 		ft_printf("%s%s\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
-		perror(strerror(errno));
+		ft_exit(2, name);
 		return ;
 	}
 	if ((file = ft_readrep(&rep, repo)) == NULL)
 	{
-		ft_exit(1);
+		ft_exit(0, "");
 		return ;
 	}
 	if ((closedir(repo)) == -1)
-		perror(strerror(errno));
+		ft_exit(2, rep.path);
 	file = ft_sortlst(file, *arg);
-	ft_display(rep, file, *arg);
+	ft_display(&rep, file, *arg);
 	if (arg->arg_R_ == TRUE)
 		ft_readdir(file, arg);
 	ft_dellst(&file);

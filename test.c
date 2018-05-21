@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/07 14:28:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/22 09:30:52 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 14:26:25 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,17 @@ void	more_info(struct dirent *file)
 	yo = NULL;
 	poto = NULL;
 	info = malloc(sizeof(struct stat));
-	if ((stat(file->d_name, info)) == 0)
+	if ((lstat(file->d_name, info)) == 0)
 	{
+		if ((info->st_mode & S_IFMT) == S_IFLNK)
+		{
+			char *buf;
+			buf = (char *)malloc(sizeof(char) * info->st_size);
+			if ((readlink(file->d_name, buf, info->st_size)) == -1)
+				perror(strerror(errno));
+			ft_printf("Link to : %s\n", buf);
+			ft_strdel(&buf);
+		}
 		ft_printf("Type : %s\n", get_type(info->st_mode));
 		ft_printf("Perms : %s\n", (bin = get_perms(info->st_mode)));
 		ft_printf("Last modified : %s", ctime(&(info->st_mtimespec.tv_sec)));

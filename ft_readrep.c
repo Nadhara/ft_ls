@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 14:41:25 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/11 16:40:12 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 19:44:19 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ t_file				*ft_readrep(t_default *rep, DIR *repo)
 	start_file = NULL;
 	if ((realpath = ft_setrealpath(rep->path)) == NULL)
 	{
-		ft_exit(1);
+		ft_exit(0, "");
 		return (NULL);
 	}
 	while ((file = readdir(repo)) != NULL)
 	{
 		if ((curr_file = ft_newfile(file->d_name, realpath)) == NULL)
-			ft_exit(1);
+			ft_exit(0, "");
 		ft_getinfo(curr_file);
 		start_file = ft_addfile(start_file, curr_file);
 		curr_file = NULL;

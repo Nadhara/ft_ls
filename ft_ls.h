@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/11 15:21:20 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 18:50:54 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ typedef struct		s_file
 	char			*mtime;
 
 	struct stat 	*stats;
-	struct stat		*lfstats;
 	struct passwd 	*nuser;
 	struct group	*ngroup;
 
 	int				isdata;
+	int				didfail;
 	struct s_file	*next;
 }					t_file;
 
@@ -50,7 +50,12 @@ typedef struct		s_default
 	char			*path;
 	int				shpth;
 	int				error;
-
+	int				maxlk;
+	int				maxlklen;
+	int				maxsz;
+	int				maxszlen;
+	size_t			maxuslen;
+	size_t			maxgrplen;
 }					t_default;
 
 typedef struct		s_arg
@@ -66,10 +71,16 @@ typedef struct		s_arg
 }					t_arg;
 
 void				ft_getopt(char *str, t_arg *arg);
-void				ft_ls(char *path, t_arg *arg, int shwpth);
+void				ft_ls(char *path, t_arg *arg, int shwpth, char *name);
 
 void				ft_showfiles(t_arg *arg);
-void				ft_display(t_default rep, t_file *start_file, t_arg arg);
+void				ft_display(t_default *rep, t_file *start_file, t_arg arg);
+void				ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg);
+int					ft_getblktot(t_file *start_file, t_arg arg);
+char				*ft_nbspl(t_file *file, t_default *wep);
+char				*ft_nbsps(t_file *file, t_default *wep);
+char				*ft_nbspu(t_file *file, t_default *wep);
+char				*ft_nbspg(t_file *file, t_default *wep);
 
 t_file				*ft_readrep(t_default *rep, DIR *repo);
 void				ft_getinfo(t_file *curr_file);
@@ -81,6 +92,6 @@ t_file				*ft_lstswitch(t_file *start_file, t_file *curr_file,
 								t_file *next_file);
 void				ft_dellst(t_file **start_file);
 
-void				ft_exit(int error);
+void				ft_exit(int error, char *name);
 
 #endif

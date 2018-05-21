@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: apruvost <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 12:35:09 by apruvost          #+#    #+#             */
-/*   Updated: 2017/11/22 12:51:48 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/10 14:30:41 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int		numsize(int n)
-{
-	int		size;
-
-	size = 0;
-	if (n < 0)
-		size++;
-	while (n)
-	{
-		size++;
-		n /= 10;
-	}
-	return (size);
-}
 
 char			*ft_itoa(int n)
 {
@@ -36,7 +21,7 @@ char			*ft_itoa(int n)
 
 	neg = 0;
 	i = 0;
-	if ((str = ft_strnew(numsize(n))) == NULL)
+	if ((str = ft_strnew(ft_getintlen(n))) == NULL)
 		return (NULL);
 	if (n < 0)
 		neg++;

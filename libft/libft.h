@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 03:09:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/03/07 13:42:36 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/21 16:26:32 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int					ft_isupper(int c);
 int					ft_islower(int c);
 int					ft_get_next_line(const int fd, char **line);
 int					ft_printf(const char * restrict format, ...);
+int					ft_dprintf(int fd, const char * restrict format, ...);
+int					ft_getintlen(int n);
 
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);
