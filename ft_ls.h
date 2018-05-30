@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 18:50:54 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/29 17:40:12 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct		s_default
 	int				error;
 	int				maxlk;
 	int				maxlklen;
-	int				maxsz;
+	long			maxsz;
 	int				maxszlen;
 	size_t			maxuslen;
 	size_t			maxgrplen;

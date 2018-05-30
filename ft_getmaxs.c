@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:04:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 19:53:50 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/29 17:24:23 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void		ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg)
 		{
 			if (file->stats->st_size > wep->maxsz)
 				wep->maxsz = file->stats->st_size;
-			if (file->stats->st_nlink > wep->maxlk)
+			if (file->stats->st_nlink > (unsigned int)wep->maxlk)
 				wep->maxlk = file->stats->st_nlink;
 			if (ft_strlen(file->nuser->pw_name) > wep->maxuslen)
 				wep->maxuslen = ft_strlen(file->nuser->pw_name);
