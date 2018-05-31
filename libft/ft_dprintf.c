@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/21 16:22:59 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 16:26:14 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/31 10:34:06 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void		ft_arg(char *str, va_list ap, int fd)
 		ft_putstr_fd((const char*)va_arg(ap, char*), fd);
 	else if (str[0] == 'd')
 		ft_putnbr_fd(va_arg(ap, int), fd);
+	else if (str[0] == 'd')
+		ft_putlong_fd(va_arg(ap, long), fd);
 	else if (str[0] == 'c')
 		ft_putchar_fd((unsigned char)va_arg(ap, int), fd);
 }

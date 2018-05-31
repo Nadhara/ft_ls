@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:04:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/29 17:24:23 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/31 10:38:52 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void		ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg)
 		file = file->next;
 	}
 	wep->maxlklen = ft_getintlen(wep->maxlk);
-	wep->maxszlen = ft_getintlen(wep->maxsz);
+	wep->maxszlen = ft_getlonglen(wep->maxsz);
 }
 
 int			ft_getblktot(t_file *start_file, t_arg arg)

@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 19:50:33 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/31 11:48:26 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,20 @@ static void		ft_getfargs(int argc, char **argv, t_arg *arg, int i)
 			if ((curr_file = ft_newfile(argv[i], "./")) == NULL)
 				ft_exit(0, "");
 		}
-
 		ft_getinfo(curr_file);
 		arg->args = ft_addfile(arg->args, curr_file);
 		curr_file = NULL;
 		i++;
 	}	
+}
+
+static void		ft_initargs(t_arg *arg)
+{
+	arg->arg_a_ = FALSE;
+	arg->arg_l_ = FALSE;
+	arg->arg_r_ = FALSE;
+	arg->arg_R_ = FALSE;
+	arg->arg_t_ = FALSE;	
 }
 
 static void		ft_getargs(int argc, char **argv, t_arg *arg)
@@ -44,6 +52,7 @@ static void		ft_getargs(int argc, char **argv, t_arg *arg)
 
 	i = 1;
 	isarg = TRUE;
+	ft_initargs(arg);
 	while (isarg == TRUE && i < argc)
 	{
 		if (argv[i][0] == '-' && argv[i][1] != '\0')

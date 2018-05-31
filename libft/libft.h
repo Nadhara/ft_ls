@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 03:09:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 16:26:32 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/31 10:36:23 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void				ft_putendl(char const *s);
 void				ft_putendl_fd(char const *s, int fd);
 void				ft_putnbr(int n);
 void				ft_putnbr_fd(int n, int fd);
+void				ft_putlong(long n);
+void				ft_putlong_fd(long n, int fd);
 void				*ft_memset(void *b, int c, size_t len);
 void				*ft_memcpy(void *dst, const void *src, size_t n);
 void				*ft_memccpy(void *dst, const void *src, int c, size_t n);
@@ -78,6 +80,7 @@ int					ft_get_next_line(const int fd, char **line);
 int					ft_printf(const char * restrict format, ...);
 int					ft_dprintf(int fd, const char * restrict format, ...);
 int					ft_getintlen(int n);
+int					ft_getlonglen(long n);
 
 char				*ft_strdup(const char *s1);
 char				*ft_strcpy(char *dst, const char *src);

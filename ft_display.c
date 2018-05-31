@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:53:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 19:52:47 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/05/31 10:40:13 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void		ft_dismore(t_file *file, t_default *wep)
 	char		*ltar;
 	
 	file->mtime[16] = '\0';
-	ft_printf("%c%s %s%d %s%s  %s%s  %s%d %s %s%s\n",file->type, file->perms,
+	ft_printf("%c%s %s%d %s%s  %s%s  %s%l %s %s%s\n",file->type, file->perms,
 		spl = ft_nbspl(file, wep), file->stats->st_nlink,
 		file->nuser->pw_name, spu = ft_nbspu(file, wep),
 		file->ngroup->gr_name, spg = ft_nbspg(file, wep),
