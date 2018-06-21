@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:53:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/31 10:40:13 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/21 15:14:28 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,49 @@
 
 static char		*ft_linktar(t_file *file)
 {
-	char		*buf;
+	char		buf[1024];
 	char		*res;
+	ssize_t		len;
 
-	buf = NULL;
 	file->didfail = 0;
 	if (file->type != 'l')
 		return ("");
-	if ((buf = (char *)malloc(file->stats->st_size + 1)) == NULL)
+	if ((len = readlink(file->path, buf, 1023)) == -1)
 	{
 		file->didfail = 1;
 		return ("");
 	}
-	buf[file->stats->st_size] = '\0';
-	if ((readlink(file->path, buf, file->stats->st_size)) == -1)
+	buf[len] = '\0';
+	if ((res = ft_strjoin(" -> ", buf)) == NULL)
 	{
 		file->didfail = 1;
 		return ("");
 	}
-	res = ft_strjoin(" -> ", buf);
-	ft_strdel(&buf);
 	return (res);
+}
+
+static void		ft_disspe(t_file *file, t_default *wep)
+{
+	char 		*spl;
+	char		*spmaj;
+	char		*spmin;
+	char		*spu;
+	char		*spg;
+	
+	ft_gettimest(file);
+	ft_printf("%c%s %s%d %s%s  %s%s   %s%d, %s%d %s %s\n",file->type,
+		file->perms, spl = ft_nbspl(file, wep), file->stats->st_nlink,
+		file->nuser, spu = ft_nbspu(file, wep),
+		file->ngroup, spg = ft_nbspg(file, wep),
+		spmaj = ft_nbspmaj(file, wep), major(file->stats->st_rdev),
+		spmin = ft_nbspmin(file, wep), minor(file->stats->st_rdev),
+		file->mtimechr, file->name);
+	ft_strdel(&spl);
+	ft_strdel(&spmaj);
+	ft_strdel(&spmin);
+	ft_strdel(&spu);
+	ft_strdel(&spg);
+	ft_strdel(&(file->mtimechr));
 }
 
 static void		ft_dismore(t_file *file, t_default *wep)
@@ -46,10 +68,14 @@ static void		ft_dismore(t_file *file, t_default *wep)
 	char		*ltar;
 	
 	file->mtime[16] = '\0';
+	if (file->type == 'c' || file->type == 'b')
+		ft_disspe(file, wep);
+	else
+	{
 	ft_printf("%c%s %s%d %s%s  %s%s  %s%l %s %s%s\n",file->type, file->perms,
 		spl = ft_nbspl(file, wep), file->stats->st_nlink,
-		file->nuser->pw_name, spu = ft_nbspu(file, wep),
-		file->ngroup->gr_name, spg = ft_nbspg(file, wep),
+		file->nuser, spu = ft_nbspu(file, wep),
+		file->ngroup, spg = ft_nbspg(file, wep),
 		sps = ft_nbsps(file, wep), file->stats->st_size,
 		&(file->mtime[4]), file->name, ltar = ft_linktar(file));
 	ft_strdel(&spl);
@@ -58,6 +84,7 @@ static void		ft_dismore(t_file *file, t_default *wep)
 	ft_strdel(&spg);
 	if (file->type == 'l' && file->didfail == 0)
 		ft_strdel(&ltar);
+	}
 }
 
 void			ft_display(t_default *rep, t_file *start_file, t_arg arg)

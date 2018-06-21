@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:59:11 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 18:03:57 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/21 14:44:24 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,13 @@ static void		ft_readdir(t_file *file, t_arg *arg)
 	}
 }
 
+static void		ft_ctopdir(t_arg *arg, t_default rep, char *name)
+{
+		if (rep.shpth == TRUE)
+			ft_printf("%s%s\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
+		ft_exit(2, name);	
+}
+
 void			ft_ls(char *path, t_arg *arg, int shwpth, char *name)
 {
 	t_default	rep;
@@ -42,8 +49,7 @@ void			ft_ls(char *path, t_arg *arg, int shwpth, char *name)
 	rep.path = path;
 	if ((repo = opendir(path)) == NULL)
 	{
-		ft_printf("%s%s\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
-		ft_exit(2, name);
+		ft_ctopdir(arg, rep, name);
 		return ;
 	}
 	if ((file = ft_readrep(&rep, repo)) == NULL)

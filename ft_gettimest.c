@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_gettimest.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 08:00:51 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/01 19:57:53 by apruvost         ###   ########.fr       */
+/*   Created: 2018/06/21 15:03:52 by apruvost          #+#    #+#             */
+/*   Updated: 2018/06/21 15:31:57 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_exit(int error, char *name)
+static void	ft_normaltime(t_file *file)
 {
-	ft_putstr_fd("ft_ls: ", 2);
-	if (error == 0)
-	{
-		ft_dprintf(2, "ft_ls: Can't allocate enough memory\n");
-		exit(1);
-	}
-	else if (error == 1)
-	{
-		ft_dprintf(2, "illegal option\n");
-		exit(1);
-	}
+	file->mtime[16] = '\0';
+	if ((file->mtimechr = strdup(&(file->mtime[4]))) == NULL)
+		file->mtimechr = 
+}
+
+void		ft_gettimest(t_file *file)
+{
+	time_t	curr_time;
+
+	curr_time = time(NULL);
+	if (file->fttime > curr_time)
+		ft_timewyear(file);
+	else if (curr_time - file->fttime > 15780000)
+		ft_timewyear(file);
 	else
-		ft_dprintf(2, "%s: %s\n", name, strerror(errno));
+		ft_normaltime(file);
 }

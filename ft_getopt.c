@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 02:57:26 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/31 11:47:08 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/21 14:36:08 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	ft_isarg(char c, t_arg *arg, int i)
 		arg->arg_t_ = TRUE;
 	else if (c == '-' && i == 1)
 		return (1);
-	else
+	else if (c != '1')
 		return (0);
 	return (1);
 }

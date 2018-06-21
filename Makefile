@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/08 04:13:47 by apruvost          #+#    #+#              #
-#    Updated: 2018/05/10 14:34:09 by apruvost         ###   ########.fr        #
+#    Updated: 2018/06/21 15:04:32 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS =	main.c \
 		ft_exit.c \
 		ft_sort.c \
 		ft_getmaxs.c \
-		ft_nbsp.c
+		ft_nbsp.c \
+		ft_nbsptwo.c \
+		ft_gettimest.c
 
 OBJS = $(SRCS:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:30:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 19:28:26 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/21 14:55:36 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static void		ft_getpermss(mode_t mode, char *str)
 		str[8] = '-';
 }
 
-static char		*ft_getperms(mode_t mode)
+static char			*ft_getperms(mode_t mode)
 {
-	char *str;
+	char 			*str;
 
 	str = malloc(sizeof(char) * 11);
 	str[10] = '\0';
@@ -63,7 +63,7 @@ static char		*ft_getperms(mode_t mode)
 	return (str);
 }
 
-static char		ft_gettype(mode_t mode)
+static char			ft_gettype(mode_t mode)
 {
 	if ((mode & S_IFMT) == S_IFDIR)
 		return ('d');
@@ -82,7 +82,23 @@ static char		ft_gettype(mode_t mode)
 	return ('-');
 }
 
-void			ft_getinfo(t_file *file)
+static int			ft_getusgr(t_file *file)
+{
+	struct passwd	*usn;
+	struct group	*grn;
+
+	if ((usn = getpwuid(file->stats->st_uid)) == NULL)
+		return (0);
+	if ((grn = getgrgid(file->stats->st_gid)) == NULL)
+		return (0);
+	if ((file->nuser = ft_strdup(usn->pw_name)) == NULL)
+		ft_exit(0, file->name);
+	if ((file->ngroup = ft_strdup(grn->gr_name)) == NULL)
+		ft_exit(0, file->name);
+	return (1);
+}
+
+void				ft_getinfo(t_file *file)
 {
 	if ((lstat(file->path, file->stats)) == 0)
 	{
@@ -94,9 +110,8 @@ void			ft_getinfo(t_file *file)
 			ft_exit(0, "");
 			file->isdata = 3;
 		}
-		if ((file->nuser = getpwuid(file->stats->st_uid)) == NULL)
-			ft_exit(2, file->name);
-		if ((file->ngroup = getgrgid(file->stats->st_gid)) == NULL)
+		file->fttime = file->stats->st_mtime;
+		if ((ft_getusgr(file)) == 0)
 			ft_exit(2, file->name);
 	}
 	else
