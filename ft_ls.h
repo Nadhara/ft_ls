@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 14:56:08 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/29 13:39:04 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct		s_file
 	char			type;
 	char			*perms;
 	time_t			fttime;
+	int				timenorm;
 	char			*mtime;
 	char			*mtimechr;
 	char			*nuser;
@@ -90,6 +91,7 @@ char				*ft_nbspu(t_file *file, t_default *wep);
 char				*ft_nbspg(t_file *file, t_default *wep);
 char				*ft_nbspmaj(t_file *file, t_default *wep);
 char				*ft_nbspmin(t_file *file, t_default *wep);
+void				ft_gettimest(t_file *file);
 
 t_file				*ft_readrep(t_default *rep, DIR *repo);
 void				ft_getinfo(t_file *curr_file);

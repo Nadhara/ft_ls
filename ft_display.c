@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:53:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 15:14:28 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/29 13:49:21 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void		ft_disspe(t_file *file, t_default *wep)
 	ft_strdel(&spmin);
 	ft_strdel(&spu);
 	ft_strdel(&spg);
-	ft_strdel(&(file->mtimechr));
+	if (file->timenorm == 0)
+		ft_strdel(&(file->mtimechr));
 }
 
 static void		ft_dismore(t_file *file, t_default *wep)
@@ -67,23 +68,25 @@ static void		ft_dismore(t_file *file, t_default *wep)
 	char		*spg;
 	char		*ltar;
 	
-	file->mtime[16] = '\0';
+	ft_gettimest(file);
 	if (file->type == 'c' || file->type == 'b')
 		ft_disspe(file, wep);
 	else
 	{
-	ft_printf("%c%s %s%d %s%s  %s%s  %s%l %s %s%s\n",file->type, file->perms,
-		spl = ft_nbspl(file, wep), file->stats->st_nlink,
-		file->nuser, spu = ft_nbspu(file, wep),
-		file->ngroup, spg = ft_nbspg(file, wep),
-		sps = ft_nbsps(file, wep), file->stats->st_size,
-		&(file->mtime[4]), file->name, ltar = ft_linktar(file));
-	ft_strdel(&spl);
-	ft_strdel(&sps);
-	ft_strdel(&spu);
-	ft_strdel(&spg);
-	if (file->type == 'l' && file->didfail == 0)
-		ft_strdel(&ltar);
+		ft_printf("%c%s %s%d %s%s  %s%s  %s%l %s %s%s\n",file->type, file->perms,
+			spl = ft_nbspl(file, wep), file->stats->st_nlink,
+			file->nuser, spu = ft_nbspu(file, wep),
+			file->ngroup, spg = ft_nbspg(file, wep),
+			sps = ft_nbsps(file, wep), file->stats->st_size,
+			file->mtimechr, file->name, ltar = ft_linktar(file));
+		ft_strdel(&spl);
+		ft_strdel(&sps);
+		ft_strdel(&spu);
+		ft_strdel(&spg);
+		if (file->type == 'l' && file->didfail == 0)
+			ft_strdel(&ltar);
+		if (file->timenorm == 0)
+			ft_strdel(&(file->mtimechr));
 	}
 }
 
@@ -108,7 +111,7 @@ void			ft_display(t_default *rep, t_file *start_file, t_arg arg)
 			if (arg.arg_l_ == FALSE)
 				ft_printf("%s\n",file->name);
 			else
-			ft_dismore(file, rep);
+				ft_dismore(file, rep);
 		}
 		file = file->next;
 	}

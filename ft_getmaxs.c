@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:04:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/01 18:49:12 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/06/29 14:12:46 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void		ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg)
 	wep->maxszlen = ft_getlonglen(wep->maxsz);
 	wep->maxmajlen = ft_getintlen(wep->maxmaj);
 	wep->maxminlen = ft_getintlen(wep->maxmin);
-	wep->maxmajminlen = wep->maxmajlen + wep->maxminlen + 3;
+	if (wep->maxmaj != 0 && wep->maxmin != 0)
+		wep->maxmajminlen = wep->maxmajlen + wep->maxminlen + 3;
 	ft_getgrsmajmin(wep);
 }
 
