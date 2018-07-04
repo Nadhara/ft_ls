@@ -6,11 +6,12 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:59:11 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 14:44:24 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:26:13 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
 
 static void		ft_readdir(t_file *file, t_arg *arg)
 {
@@ -22,10 +23,20 @@ static void		ft_readdir(t_file *file, t_arg *arg)
 			{
 				if (ft_strcmp(file->name, ".") != 0 &&
 					ft_strcmp(file->name, "..") != 0)
-					ft_ls(file->path, arg, TRUE, file->name);
+				{
+					if (file->perms[2] != 'x' && file->perms[0] == 'r')
+						ft_printf("%s%s:\n", (arg->d_showed > 1 ? "\n" : ""), file->path);	
+					else
+						ft_ls(file->path, arg, TRUE, file->name);
+				}
 			}
 			else if (file->name[0] != '.')
+			{
+				if (file->perms[2] != 'x' && file->perms[0] == 'r')
+					ft_printf("%s%s:\n", (arg->d_showed > 1 ? "\n" : ""), file->path);	
+				else
 				ft_ls(file->path, arg, TRUE, file->name);
+			}
 		}
 		file = file->next;
 	}
@@ -34,7 +45,7 @@ static void		ft_readdir(t_file *file, t_arg *arg)
 static void		ft_ctopdir(t_arg *arg, t_default rep, char *name)
 {
 		if (rep.shpth == TRUE)
-			ft_printf("%s%s\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
+			ft_printf("%s%s:\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
 		ft_exit(2, name);	
 }
 

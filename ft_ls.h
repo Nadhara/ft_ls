@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/29 13:39:04 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:05:32 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,9 @@ void				ft_getinfo(t_file *curr_file);
 
 t_file				*ft_newfile(char *nname, char *reppath);
 t_file				*ft_addfile(t_file *start_file, t_file *curr_file);
+t_file				*ft_addsrtfile(t_file *start_file, t_file *curr_file);
 t_file				*ft_sortlst(t_file *start_file, t_arg arg);
-t_file				*ft_lstswitch(t_file *start_file, t_file *curr_file,
-								t_file *next_file);
+int					ft_getlstlen(t_file *start_file);
 void				ft_dellst(t_file **start_file);
 
 void				ft_exit(int error, char *name);

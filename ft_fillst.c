@@ -6,11 +6,30 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:09:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 13:34:59 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:04:42 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+t_file		*ft_addsrtfile(t_file *start_file, t_file *curr_file)
+{
+	t_file	*file;
+	t_file	*next;
+
+	if (start_file == NULL)
+		start_file = curr_file;
+	else
+	{
+		file = start_file;
+		while (file->next != NULL)
+			file = file->next;
+		file->next = curr_file;
+	}
+	next = NULL;
+	curr_file->next = next;
+	return (start_file);
+}
 
 t_file		*ft_addfile(t_file *start_file, t_file *curr_file)
 {

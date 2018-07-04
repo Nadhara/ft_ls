@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/21 15:03:52 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/29 13:50:37 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 19:47:29 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,23 @@ static void	ft_normaltime(t_file *file)
 static void	ft_timewyear(t_file *file)
 {
 	char	*bin;
+	int		i;
+	int		y;
 
 	file->mtime[11] = '\0';
-	file->mtime[24] = '\0';
 	if ((bin = ft_strdup(&(file->mtime[4]))) == NULL)
 		ft_exit(0, "");
-	if ((file->mtimechr = ft_strjoin(bin, &(file->mtime[19]))) == NULL)
+	i = 19;
+	while (file->mtime[i] == ' ')
+		i++;
+	y = i - 1;
+	while (file->mtime[i] != '\0')
+	{
+		if (file->mtime[i] == '\n')
+			file->mtime[i] = '\0';
+		i++;
+	}
+	if ((file->mtimechr = ft_strjoin(bin, &(file->mtime[y]))) == NULL)
 		ft_exit(0, "");
 	ft_strdel(&bin);
 	file->timenorm = 0;

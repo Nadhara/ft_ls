@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/31 11:48:26 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 18:59:59 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void		ft_getfargs(int argc, char **argv, t_arg *arg, int i)
 		}
 		else
 		{
-			if ((curr_file = ft_newfile(argv[i], "./")) == NULL)
+			if ((curr_file = ft_newfile(argv[i], "")) == NULL)
 				ft_exit(0, "");
 		}
 		ft_getinfo(curr_file);

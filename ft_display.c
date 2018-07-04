@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:53:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/29 13:49:21 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/04 20:12:51 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void			ft_display(t_default *rep, t_file *start_file, t_arg arg)
 		ft_putchar('\n');
 	if (rep->shpth == TRUE)
 		ft_printf("%s:\n", rep->path);
-	if (arg.arg_l_ == TRUE)
+	if (arg.arg_l_ == TRUE && (((ft_getlstlen(file) > 2)) || arg.arg_a_ ==  TRUE))
 	{
 		ft_printf("total %d\n", ft_getblktot(file, arg));
 		ft_getmaxsl(file, rep, arg);

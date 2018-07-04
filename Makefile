@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/08 04:13:47 by apruvost          #+#    #+#              #
-#    Updated: 2018/06/21 15:04:32 by apruvost         ###   ########.fr        #
+#    Updated: 2018/07/04 16:33:54 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,6 @@ SRCS =	main.c \
 		ft_readrep.c \
 		ft_getinfo.c \
 		ft_fillst.c \
-		ft_lstswitch.c \
 		ft_getopt.c \
 		ft_display.c \
 		ft_dellst.c \
