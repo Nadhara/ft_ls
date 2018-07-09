@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 06:53:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/04 20:12:51 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/09 16:24:14 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,11 +130,14 @@ void			ft_showfiles(t_arg *arg)
 		if (!((file->name[0] == '.' && arg->arg_a_ == FALSE) ||
 			file->type == 'd' || file->isdata == 0))
 		{
-			arg->d_showed++;
-			if (arg->arg_l_ == FALSE)
-				ft_printf("%s\n",file->name);
-			else
-				ft_dismore(file, &yep);
+			if (!(file->type == 'l' && file->isdata != 0 && ft_iflink(file, arg) == TRUE))
+			{
+				arg->d_showed++;
+				if (arg->arg_l_ == FALSE)
+					ft_printf("%s\n",file->name);
+				else
+					ft_dismore(file, &yep);
+			}
 		}
 		file = file->next;
 	}	

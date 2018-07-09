@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/04 19:05:32 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/09 16:25:40 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_file
 	char			*ngroup;
 
 	struct stat 	*stats;
+	struct stat 	*tarstat;
 
 	int				isdata;
 	int				didfail;
@@ -78,7 +79,7 @@ typedef struct		s_arg
 	t_file			*args;
 }					t_arg;
 
-void				ft_getopt(char *str, t_arg *arg);
+void				ft_getopt(char *str, t_arg *arg, int *isarg);
 void				ft_ls(char *path, t_arg *arg, int shwpth, char *name);
 
 void				ft_showfiles(t_arg *arg);

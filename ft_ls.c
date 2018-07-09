@@ -6,14 +6,14 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:59:11 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/04 19:26:13 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/09 15:05:00 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 
-static void		ft_readdir(t_file *file, t_arg *arg)
+static void		ft_readdir(t_file *file, t_arg *arg, int shwpth)
 {
 	while (file != NULL)
 	{
@@ -46,7 +46,7 @@ static void		ft_ctopdir(t_arg *arg, t_default rep, char *name)
 {
 		if (rep.shpth == TRUE)
 			ft_printf("%s%s:\n", (arg->d_showed > 1 ? "\n" : ""), rep.path);
-		ft_exit(2, name);	
+		ft_exit(2, name);
 }
 
 void			ft_ls(char *path, t_arg *arg, int shwpth, char *name)
@@ -73,6 +73,6 @@ void			ft_ls(char *path, t_arg *arg, int shwpth, char *name)
 	file = ft_sortlst(file, *arg);
 	ft_display(&rep, file, *arg);
 	if (arg->arg_R_ == TRUE)
-		ft_readdir(file, arg);
+		ft_readdir(file, arg, rep.shwpth);
 	ft_dellst(&file);
 }

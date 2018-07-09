@@ -6,13 +6,13 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 02:57:26 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 14:36:08 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/09 14:34:22 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static int	ft_isarg(char c, t_arg *arg, int i)
+static int	ft_isarg(char c, t_arg *arg, int i, int *isarg)
 {
 	if (c == 'l')
 		arg->arg_l_ = TRUE;
@@ -25,13 +25,16 @@ static int	ft_isarg(char c, t_arg *arg, int i)
 	else if (c == 't')
 		arg->arg_t_ = TRUE;
 	else if (c == '-' && i == 1)
+	{
+		*isarg = FALSE;
 		return (1);
+	}
 	else if (c != '1')
 		return (0);
 	return (1);
 }
 
-void		ft_getopt(char *str, t_arg *arg)
+void		ft_getopt(char *str, t_arg *arg, int *isarg)
 {
 	size_t	len;
 	size_t i;
@@ -40,11 +43,17 @@ void		ft_getopt(char *str, t_arg *arg)
 	i = 1;
 	while (i < len)
 	{
-		if ((ft_isarg(str[i], arg, i)) == 0)
+		if ((ft_isarg(str[i], arg, i, isarg)) == 0)
 		{
 			ft_exit(1, str);
 			return ;
 		}
 		i++;
+		if (*isarg == FALSE)
+		{
+			if (str[i] != '\0')
+				ft_exit(1, str);
+			return ;
+		}
 	}
 }

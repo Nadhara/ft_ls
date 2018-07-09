@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/04 18:59:59 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/09 16:14:16 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void		ft_getargs(int argc, char **argv, t_arg *arg)
 	{
 		if (argv[i][0] == '-' && argv[i][1] != '\0')
 		{
-			ft_getopt(argv[i], arg);
+			ft_getopt(argv[i], arg, &isarg);
 			i++;
 		}
 		else
@@ -103,7 +103,7 @@ int				main(int argc, char **argv)
 				ft_ls(curr_file->path, &arg,
 						((arg.nb_file > 1) ? TRUE : FALSE), curr_file->name);
 			curr_file = curr_file->next;
-		} 
+		}
 	}
 	if (arg.args != NULL)
 		ft_dellst(&arg.args);
