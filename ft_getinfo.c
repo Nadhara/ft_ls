@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:30:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/21 14:55:36 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/12 16:56:40 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ static char			*ft_getperms(mode_t mode)
 	else
 		str[3] = '-';
 	ft_getpermss(mode, str);
+	ft_getspeperm(mode, str);
 	return (str);
 }
 
@@ -88,13 +89,19 @@ static int			ft_getusgr(t_file *file)
 	struct group	*grn;
 
 	if ((usn = getpwuid(file->stats->st_uid)) == NULL)
-		return (0);
+		file->nuser = ft_itoa(file->stats->st_uid);
+	else
+	{
+		if ((file->nuser = ft_strdup(usn->pw_name)) == NULL)
+			ft_exit(0, file->name);
+	}
 	if ((grn = getgrgid(file->stats->st_gid)) == NULL)
-		return (0);
-	if ((file->nuser = ft_strdup(usn->pw_name)) == NULL)
-		ft_exit(0, file->name);
-	if ((file->ngroup = ft_strdup(grn->gr_name)) == NULL)
-		ft_exit(0, file->name);
+		file->ngroup = ft_itoa(file->stats->st_gid);
+	else
+	{
+		if ((file->ngroup = ft_strdup(grn->gr_name)) == NULL)
+			ft_exit(0, file->name);
+	}
 	return (1);
 }
 

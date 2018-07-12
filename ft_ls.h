@@ -6,16 +6,13 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/09 16:25:40 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/12 15:25:05 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
 
 # define FT_LS_H
-
-# define TRUE 1
-# define FALSE 0
 
 # include <dirent.h>
 # include <sys/stat.h>
@@ -42,7 +39,10 @@ typedef struct		s_file
 	char			*ngroup;
 
 	struct stat 	*stats;
+
 	struct stat 	*tarstat;
+	int				isltard;
+	char			ltarname[1024];
 
 	int				isdata;
 	int				didfail;
@@ -52,7 +52,9 @@ typedef struct		s_file
 typedef struct		s_default
 {
 	char			*path;
+	char			*name;
 	int				shpth;
+	int				isltar;
 	int				error;
 	int				maxlk;
 	int				maxlklen;
@@ -82,6 +84,8 @@ typedef struct		s_arg
 void				ft_getopt(char *str, t_arg *arg, int *isarg);
 void				ft_ls(char *path, t_arg *arg, int shwpth, char *name);
 
+char				**ft_sortarg(int argc, char **argv, int i);
+
 void				ft_showfiles(t_arg *arg);
 void				ft_display(t_default *rep, t_file *start_file, t_arg arg);
 void				ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg);
@@ -96,6 +100,8 @@ void				ft_gettimest(t_file *file);
 
 t_file				*ft_readrep(t_default *rep, DIR *repo);
 void				ft_getinfo(t_file *curr_file);
+void				ft_getspeperm(mode_t mode, char *str);
+int					ft_iflink(t_file *file, t_arg *arg);
 
 t_file				*ft_newfile(char *nname, char *reppath);
 t_file				*ft_addfile(t_file *start_file, t_file *curr_file);

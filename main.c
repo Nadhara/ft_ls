@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/09 16:14:16 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/12 14:39:47 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void		ft_getfargs(int argc, char **argv, t_arg *arg, int i)
 {
 	t_file		*curr_file;
 
+	argv = ft_sortarg(argc, argv, i);
 	while (i < argc)
 	{
 		if (argv[i][0] == '~' || argv[i][0] == '/' ||
@@ -102,6 +103,9 @@ int				main(int argc, char **argv)
 			if (curr_file->type == 'd' && curr_file->isdata != 0)
 				ft_ls(curr_file->path, &arg,
 						((arg.nb_file > 1) ? TRUE : FALSE), curr_file->name);
+			else if (curr_file->isltard == TRUE)
+				ft_ls(curr_file->ltarname, &arg,
+						((arg.nb_file > 1) ? 3 : 2), curr_file->name);
 			curr_file = curr_file->next;
 		}
 	}

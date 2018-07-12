@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   ft_getspeperm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/22 08:00:51 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 14:55:46 by apruvost         ###   ########.fr       */
+/*   Created: 2018/07/12 15:19:15 by apruvost          #+#    #+#             */
+/*   Updated: 2018/07/12 15:25:42 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	ft_exit(int error, char *name)
+void	ft_getspeperm(mode_t mode, char *str)
 {
-	ft_putstr_fd("ls: ", 2);
-	if (error == 0)
+	if ((mode & S_ISUID) == S_ISUID)
 	{
-		ft_dprintf(2, "ls: Can't allocate enough memory\n");
-		exit(1);
+		if (str[2] == 'x')
+			str[2] = 's';
+		else
+			str[2] = 'S';
 	}
-	else if (error == 1)
+	if ((mode & S_ISGID) == S_ISGID)
 	{
-		ft_dprintf(2, "illegal option -- %c\n", *name);
-		ft_dprintf(2, "usage: ls [-Ralrt1] [file ...]\n");
-		exit(1);
+		if (str[5] == 'x')
+			str[5] = 's';
+		else
+			str[5] = 'S';
 	}
-	else if (name[0] == '\0')
+	if ((mode & S_ISVTX) == S_ISVTX)
 	{
-		ft_dprintf(2, "%s: %s\n", "fts_open", strerror(errno));
-		exit(1);
+		if (str[8] == 'x')
+			str[8] = 't';
+		else	
+			str[8] = 'T';
 	}
-	else
-		ft_dprintf(2, "%s: %s\n", name, strerror(errno));
 }

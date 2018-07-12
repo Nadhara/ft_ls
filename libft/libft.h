@@ -6,13 +6,16 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/08 03:09:13 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/31 10:36:23 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/07/12 13:24:58 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 
 # define LIBFT_H
+
+# define TRUE 1
+# define FALSE 0
 
 # include <unistd.h>
 # include <stdlib.h>
