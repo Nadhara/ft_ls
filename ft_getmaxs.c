@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/10 13:04:46 by apruvost          #+#    #+#             */
-/*   Updated: 2018/06/29 14:12:46 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/22 12:19:02 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ static void	ft_getmaxsm(t_file *file, t_default *wep)
 	}
 	else
 	{
-			if (file->stats->st_size > wep->maxsz)
-				wep->maxsz = file->stats->st_size;
+		if (file->stats->st_size > wep->maxsz)
+			wep->maxsz = file->stats->st_size;
 	}
 }
 
@@ -43,6 +43,8 @@ static void	ft_initmax(t_default *wep)
 
 static void	ft_getgrsmajmin(t_default *wep)
 {
+	if (wep->maxmaj != 0 && wep->maxmin != 0)
+		wep->maxmajminlen = wep->maxmajlen + wep->maxminlen + 3;
 	if (wep->maxszlen > wep->maxmajminlen)
 		wep->maxmajminlen = wep->maxszlen;
 	else
@@ -74,8 +76,6 @@ void		ft_getmaxsl(t_file *start_file, t_default *wep, t_arg arg)
 	wep->maxszlen = ft_getlonglen(wep->maxsz);
 	wep->maxmajlen = ft_getintlen(wep->maxmaj);
 	wep->maxminlen = ft_getintlen(wep->maxmin);
-	if (wep->maxmaj != 0 && wep->maxmin != 0)
-		wep->maxmajminlen = wep->maxmajlen + wep->maxminlen + 3;
 	ft_getgrsmajmin(wep);
 }
 

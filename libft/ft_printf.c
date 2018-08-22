@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 14:42:32 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/31 10:34:21 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:35:24 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void		ft_arg(char *str, va_list ap)
 		ft_putchar((unsigned char)va_arg(ap, int));
 }
 
-int				ft_printf(const char * restrict format, ...)
+int				ft_printf(const char *restrict format, ...)
 {
 	int			i;
 	va_list		ap;

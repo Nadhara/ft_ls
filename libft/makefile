@@ -6,7 +6,7 @@
 #    By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/08 02:24:37 by apruvost          #+#    #+#              #
-#    Updated: 2018/05/31 10:38:12 by apruvost         ###   ########.fr        #
+#    Updated: 2018/08/22 12:32:59 by apruvost         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,8 @@ SRC = ft_memset.c \
 	  ft_getintlen.c \
 	  ft_getlonglen.c \
 	  ft_putlong.c \
-	  ft_putlong_fd.c
+	  ft_putlong_fd.c \
+	  ft_strddel.c
 
 HEADER = ./
 
@@ -160,7 +161,8 @@ OBJECTS = ft_memset.o \
 		  ft_getintlen.o \
 		  ft_getlonglen.o \
 		  ft_putlong.o \
-		  ft_putlong_fd.o
+		  ft_putlong_fd.o \
+		  ft_strddel.o
 
 all: $(NAME)
 

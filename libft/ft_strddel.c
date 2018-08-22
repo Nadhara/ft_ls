@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getspeperm.c                                    :+:      :+:    :+:   */
+/*   ft_strddel.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/12 15:19:15 by apruvost          #+#    #+#             */
-/*   Updated: 2018/08/01 19:13:17 by apruvost         ###   ########.fr       */
+/*   Created: 2017/11/15 16:20:06 by apruvost          #+#    #+#             */
+/*   Updated: 2018/08/22 12:31:48 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_ls.h"
+#include "libft.h"
 
-void	ft_getspeperm(mode_t mode, char *str)
+void	ft_strddel(char **as, char **bs)
 {
-	if ((mode & S_ISUID) == S_ISUID)
+	if (as)
 	{
-		if (str[2] == 'x')
-			str[2] = 's';
-		else
-			str[2] = 'S';
+		free(*as);
+		*as = 0;
 	}
-	if ((mode & S_ISGID) == S_ISGID)
+	if (bs)
 	{
-		if (str[5] == 'x')
-			str[5] = 's';
-		else
-			str[5] = 'S';
-	}
-	if ((mode & S_ISVTX) == S_ISVTX)
-	{
-		if (str[8] == 'x')
-			str[8] = 't';
-		else
-			str[8] = 'T';
+		free(*as);
+		*as = 0;
 	}
 }

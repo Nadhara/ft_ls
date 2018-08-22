@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 02:57:26 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 13:39:44 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/22 13:47:49 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	ft_isarg(char c, t_arg *arg, int i, int *isarg)
 	else if (c == 'a')
 		arg->arg_a_ = TRUE;
 	else if (c == 'R')
-		arg->arg_R_ = TRUE;
+		arg->arg_br_ = TRUE;
 	else if (c == 'r')
 		arg->arg_r_ = TRUE;
 	else if (c == 't')
@@ -34,12 +34,21 @@ static int	ft_isarg(char c, t_arg *arg, int i, int *isarg)
 	return (1);
 }
 
+void		ft_initargs(t_arg *arg)
+{
+	arg->arg_a_ = FALSE;
+	arg->arg_l_ = FALSE;
+	arg->arg_r_ = FALSE;
+	arg->arg_br_ = FALSE;
+	arg->arg_t_ = FALSE;
+}
+
 void		ft_getopt(char *str, t_arg *arg, int *isarg)
 {
 	size_t	len;
-	size_t i;
+	size_t	i;
 
-	len  = ft_strlen(str);
+	len = ft_strlen(str);
 	i = 1;
 	while (i < len)
 	{

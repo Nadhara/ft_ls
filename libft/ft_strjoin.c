@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/15 19:07:04 by apruvost          #+#    #+#             */
-/*   Updated: 2018/04/05 09:18:54 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:33:56 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		}
 		while (*s2)
 		{
-
 			str[len] = (char)*s2;
 			s2++;
 			len++;

@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 07:47:08 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 16:54:48 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/22 12:35:44 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static void		ft_dellone(t_file **file)
 		ft_strdel(&(*file)->mtime);
 		ft_strdel(&(*file)->nuser);
 		ft_strdel(&(*file)->ngroup);
-	} 
+	}
 	ft_memdel((void **)file);
 	*file = NULL;
 }
 
-void		ft_dellst(t_file **start_file)
+void			ft_dellst(t_file **start_file)
 {
 	if ((*start_file)->next != NULL)
 		ft_dellst(&(*start_file)->next);

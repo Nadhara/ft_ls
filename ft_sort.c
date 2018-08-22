@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 13:22:08 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/04 19:05:39 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:38:52 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int		ft_comparenext(t_file *left, t_file *right, t_arg arg)
 		if (left->stats->st_mtime < right->stats->st_mtime)
 			return (1);
 		else if (left->stats->st_mtime == right->stats->st_mtime)
-		{	
-			if (ft_strcmp(left->name, right->name) < 0)
+		{
+			if (ft_strcmp(left->name, right->name) > 0)
 				return (1);
 		}
 	}

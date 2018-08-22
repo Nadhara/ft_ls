@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 15:59:18 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 14:39:47 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/22 13:49:15 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		ft_getfargs(int argc, char **argv, t_arg *arg, int i)
 	while (i < argc)
 	{
 		if (argv[i][0] == '~' || argv[i][0] == '/' ||
-			(argv[i][0] == '.' && ( argv[i][1] == '\0' || argv[i][1] == '/')))
+			(argv[i][0] == '.' && (argv[i][1] == '\0' || argv[i][1] == '/')))
 		{
 			if ((curr_file = ft_newfile(argv[i], "")) == NULL)
 				ft_exit(0, "");
@@ -34,16 +34,7 @@ static void		ft_getfargs(int argc, char **argv, t_arg *arg, int i)
 		arg->args = ft_addfile(arg->args, curr_file);
 		curr_file = NULL;
 		i++;
-	}	
-}
-
-static void		ft_initargs(t_arg *arg)
-{
-	arg->arg_a_ = FALSE;
-	arg->arg_l_ = FALSE;
-	arg->arg_r_ = FALSE;
-	arg->arg_R_ = FALSE;
-	arg->arg_t_ = FALSE;	
+	}
 }
 
 static void		ft_getargs(int argc, char **argv, t_arg *arg)
@@ -77,11 +68,25 @@ static void		ft_noarg(t_arg *arg)
 	arg->arg_a_ = FALSE;
 	arg->arg_l_ = FALSE;
 	arg->arg_r_ = FALSE;
-	arg->arg_R_ = FALSE;
+	arg->arg_br_ = FALSE;
 	arg->arg_t_ = FALSE;
 	arg->nb_file = FALSE;
 	arg->args = NULL;
 	arg->d_showed = 0;
+}
+
+static void		ft_lsargs(t_file *curr_file, t_arg arg)
+{
+	while (curr_file != NULL)
+	{
+		if (curr_file->type == 'd' && curr_file->isdata != 0)
+			ft_ls(curr_file->path, &arg,
+					((arg.nb_file > 1) ? TRUE : FALSE), curr_file->name);
+		else if (curr_file->isltard == TRUE)
+			ft_ls(curr_file->ltarname, &arg,
+				((arg.nb_file > 1) ? 3 : 2), curr_file->name);
+		curr_file = curr_file->next;
+	}
 }
 
 int				main(int argc, char **argv)
@@ -98,16 +103,7 @@ int				main(int argc, char **argv)
 	else
 	{
 		curr_file = arg.args;
-		while (curr_file != NULL)
-		{
-			if (curr_file->type == 'd' && curr_file->isdata != 0)
-				ft_ls(curr_file->path, &arg,
-						((arg.nb_file > 1) ? TRUE : FALSE), curr_file->name);
-			else if (curr_file->isltard == TRUE)
-				ft_ls(curr_file->ltarname, &arg,
-						((arg.nb_file > 1) ? 3 : 2), curr_file->name);
-			curr_file = curr_file->next;
-		}
+		ft_lsargs(curr_file, arg);
 	}
 	if (arg.args != NULL)
 		ft_dellst(&arg.args);

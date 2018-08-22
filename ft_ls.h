@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:05:14 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 15:25:05 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/22 13:47:08 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ typedef struct		s_file
 	char			*nuser;
 	char			*ngroup;
 
-	struct stat 	*stats;
+	struct stat		*stats;
 
-	struct stat 	*tarstat;
+	struct stat		*tarstat;
 	int				isltard;
 	char			ltarname[1024];
 
@@ -72,7 +72,7 @@ typedef struct		s_default
 typedef struct		s_arg
 {
 	int				arg_l_;
-	int				arg_R_;
+	int				arg_br_;
 	int				arg_a_;
 	int				arg_r_;
 	int				arg_t_;
@@ -82,6 +82,7 @@ typedef struct		s_arg
 }					t_arg;
 
 void				ft_getopt(char *str, t_arg *arg, int *isarg);
+void				ft_initargs(t_arg *arg);
 void				ft_ls(char *path, t_arg *arg, int shwpth, char *name);
 
 char				**ft_sortarg(int argc, char **argv, int i);
@@ -99,7 +100,7 @@ char				*ft_nbspmin(t_file *file, t_default *wep);
 void				ft_gettimest(t_file *file);
 
 t_file				*ft_readrep(t_default *rep, DIR *repo);
-void				ft_getinfo(t_file *curr_file);
+int					ft_getinfo(t_file *curr_file);
 void				ft_getspeperm(mode_t mode, char *str);
 int					ft_iflink(t_file *file, t_arg *arg);
 

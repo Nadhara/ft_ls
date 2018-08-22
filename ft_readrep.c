@@ -6,7 +6,7 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 14:41:25 by apruvost          #+#    #+#             */
-/*   Updated: 2018/05/21 19:44:19 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:39:19 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static char			*ft_setrealpath(char *path)
 	}
 	else
 	{
-		if ((rpath = strdup(path)) == NULL)
+		if ((rpath = ft_strdup(path)) == NULL)
 			return (NULL);
 	}
 	return (rpath);
@@ -47,7 +47,11 @@ t_file				*ft_readrep(t_default *rep, DIR *repo)
 	{
 		if ((curr_file = ft_newfile(file->d_name, realpath)) == NULL)
 			ft_exit(0, "");
-		ft_getinfo(curr_file);
+		if ((ft_getinfo(curr_file)) == 0)
+		{
+			ft_strdel(&realpath);
+			return (curr_file);
+		}
 		start_file = ft_addfile(start_file, curr_file);
 		curr_file = NULL;
 	}

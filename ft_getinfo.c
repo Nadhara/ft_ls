@@ -6,13 +6,13 @@
 /*   By: apruvost <apruvost@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 14:30:42 by apruvost          #+#    #+#             */
-/*   Updated: 2018/07/12 16:56:40 by apruvost         ###   ########.fr       */
+/*   Updated: 2018/08/01 19:28:27 by apruvost         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-static void		ft_getpermss(mode_t mode, char *str)
+static void			ft_getpermss(mode_t mode, char *str)
 {
 	if ((mode & S_IWGRP) == S_IWGRP)
 		str[4] = 'w';
@@ -32,13 +32,13 @@ static void		ft_getpermss(mode_t mode, char *str)
 		str[7] = '-';
 	if ((mode & S_IXOTH) == S_IXOTH)
 		str[8] = 'x';
-	else	
+	else
 		str[8] = '-';
 }
 
 static char			*ft_getperms(mode_t mode)
 {
-	char 			*str;
+	char			*str;
 
 	str = malloc(sizeof(char) * 11);
 	str[10] = '\0';
@@ -105,7 +105,7 @@ static int			ft_getusgr(t_file *file)
 	return (1);
 }
 
-void				ft_getinfo(t_file *file)
+int					ft_getinfo(t_file *file)
 {
 	if ((lstat(file->path, file->stats)) == 0)
 	{
@@ -124,6 +124,12 @@ void				ft_getinfo(t_file *file)
 	else
 	{
 		file->isdata = 0;
+		if (ft_strcmp(file->name, ".") == 0)
+		{
+			if (ft_strcmp(strerror(errno), "Permission denied") == 0)
+				return (0);
+		}
 		ft_exit(2, file->name);
 	}
+	return (1);
 }
